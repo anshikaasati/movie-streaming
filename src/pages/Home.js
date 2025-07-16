@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import BannerHome from '../components/BannerHome'
 import { useSelector } from 'react-redux'
-import Card from '../components/Card'
 import HorizontalScollCard from '../components/HorizontalScollCard'
-import axios from 'axios'
 import useFetch from '../hooks/useFetch'
 
 const Home = () => {

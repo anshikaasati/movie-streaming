@@ -11,34 +11,6 @@ const SearchPage = () => {
 
   const query = location?.search?.slice(3)
 
-  const fetchData = async()=>{
-    try {
-        const response = await axios.get(`search/multi`,{
-          params : {
-            query :location?.search?.slice(3),
-            page : page
-          }
-        })
-        setData((preve)=>{
-          return[
-              ...preve,
-              ...response.data.results
-          ]
-        })
-    } catch (error) {
-        console.log('error',error)
-    }
-  }
-
-  useEffect(()=>{
-    if(query){
-      setPage(1)
-      setData([])
-      fetchData()
-    }
-  },[location?.search])
-
-
   const handleScroll = ()=>{
     if((window.innerHeight + window.scrollY ) >= document.body.offsetHeight){
       setPage(preve => preve + 1)
@@ -46,10 +18,36 @@ const SearchPage = () => {
   }
 
   useEffect(()=>{
+    const fetchData = async()=>{
+      try {
+          const response = await axios.get(`search/multi`,{
+            params : {
+              query :location?.search?.slice(3),
+              page : page
+            }
+          })
+          setData((preve)=>{
+            return[
+                ...preve,
+                ...response.data.results
+            ]
+          })
+      } catch (error) {
+          console.log('error',error)
+      }
+    }
+
     if(query){
       fetchData()
     }
-  },[page])
+  },[page, query, location?.search])
+
+  useEffect(()=>{
+    if(query){
+      setPage(1)
+      setData([])
+    }
+  },[location?.search, query])
 
   useEffect(()=>{
     window.addEventListener('scroll',handleScroll)

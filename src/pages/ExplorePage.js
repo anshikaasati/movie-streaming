@@ -7,28 +7,8 @@ const ExplorePage = () => {
   const params = useParams()
   const [pageNo,setPageNo] = useState(1)
   const [data,setData] = useState([])
-  const [totalPageNo,setTotalPageNo] = useState(0)
 
   console.log("params",params.explore)
-
-  const fetchData = async()=>{
-    try {
-        const response = await axios.get(`/discover/${params.explore}`,{
-          params : {
-            page : pageNo
-          }
-        })
-        setData((preve)=>{
-          return[
-              ...preve,
-              ...response.data.results
-          ]
-        })
-        setTotalPageNo(response.data.total_pages)
-    } catch (error) {
-        console.log('error',error)
-    }
-  }
 
   const handleScroll = ()=>{
     if((window.innerHeight + window.scrollY ) >= document.body.offsetHeight){
@@ -37,13 +17,30 @@ const ExplorePage = () => {
   }
 
   useEffect(()=>{
+    const fetchData = async()=>{
+      try {
+          const response = await axios.get(`/discover/${params.explore}`,{
+            params : {
+              page : pageNo
+            }
+          })
+          setData((preve)=>{
+            return[
+                ...preve,
+                ...response.data.results
+            ]
+          })
+      } catch (error) {
+          console.log('error',error)
+      }
+    }
+
     fetchData()
-  },[pageNo])
+  },[pageNo, params.explore])
 
   useEffect(()=>{
       setPageNo(1)
       setData([])
-      fetchData()
   },[params.explore])
 
   useEffect(()=>{

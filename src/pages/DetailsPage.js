@@ -38,6 +38,7 @@ const DetailsPage = () => {
                 <img
                     src={imageURL+data?.backdrop_path}
                     className='h-full w-full object-cover'
+                    alt={`${data?.title || data?.name || 'Movie'} backdrop`}
                 /> 
               </div> 
               <div className='absolute w-full h-full top-0 bg-gradient-to-t from-neutral-900/90 to-transparent'></div>    
@@ -48,6 +49,7 @@ const DetailsPage = () => {
                   <img
                       src={imageURL+data?.poster_path}
                       className='h-80 w-60 object-cover rounded'
+                      alt={`${data?.title || data?.name || 'Movie'} poster`}
                   /> 
                   <button onClick={()=>handlePlayVideo(data)} className='mt-3 w-full py-2 px-4 text-center bg-white text-black rounded font-bold text-lg hover:bg-gradient-to-l from-red-500 to-orange-500 hover:scale-105 transition-all'>Play Now</button>
               </div>
@@ -116,6 +118,7 @@ const DetailsPage = () => {
                               <img
                                 src={imageURL+starCast?.profile_path} 
                                 className='w-24 h-24 object-cover rounded-full'
+                                alt={`${starCast?.name || 'Cast member'} profile`}
                               />
                             </div>
                             <p className='font-bold text-center text-sm text-neutral-400'>{starCast?.name}</p>
