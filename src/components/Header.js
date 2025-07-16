@@ -16,7 +16,7 @@ const Header = () => {
         if(searchInput){
             navigate(`/search?q=${searchInput}`)
         }
-    },[searchInput])
+    },[searchInput, navigate])
 
     const handleSubmit = (e)=>{
         e.preventDefault()
@@ -63,7 +63,8 @@ const Header = () => {
                     <div className='w-8 h-8 rounded-full overflow-hidden cursor-pointer active:scale-50 transition-all'>
                         <img
                             src={userIcon}
-                            width='w-ful h-full' 
+                            width='w-ful h-full'
+                            alt="User profile"
                         />
                     </div>
                 </div>
